@@ -8,6 +8,9 @@ packages = [{include = "rpi_project"}]
 
 [tool.poetry.dependencies]
 python = "^3.10"
+pyqt6 = "^6.4.0"
+pyqt6-charts = "^6.4.0"
+pyqtgraph = "^0.13.1"
 
 
 [build-system]
