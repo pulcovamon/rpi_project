@@ -1,4 +1,4 @@
-from PyQt6.QtWidgets import (
+from PyQt5.QtWidgets import (
     QApplication,
     QPushButton,
     QGridLayout,
@@ -6,14 +6,14 @@ from PyQt6.QtWidgets import (
     QDialog,
     QLabel
 )
-from PyQt6.QtCore import QTimer
-from PyQt6.QtCore import Qt, QPointF
+from PyQt5.QtCore import QTimer
+from PyQt5.QtCore import Qt, QPointF
 import pyqtgraph as pg
 from pyqtgraph import PlotWidget, plot, AxisItem
-from PyQt6.QtGui import QPainter
+from PyQt5.QtGui import QPainter
 import sys
 from datetime import datetime
-import temperature_sensor as sensor
+import sensors
 
 class Window(QDialog):
     def __init__(self):
@@ -21,7 +21,7 @@ class Window(QDialog):
         self.setWindowTitle('Weather station')
         self.layout = QGridLayout()
         self.setLayout(self.layout)
-        self.setGeometry(0, 0, 480, 320)
+        self.showFullScreen()
 
         self.tempout_list = []
         self.tempin_list = []
@@ -32,12 +32,14 @@ class Window(QDialog):
         self.tempout_graph = PlotWidget()
         self.tempout_graph.setBackground(None)
         self.tempout_graph.showGrid(x=True, y=True)
+        self.tempout_graph.setMouseEnabled(x=False, y=False)
         self.data_out = self.tempout_graph.plot(
                     self.hour_list, self.tempout_list)
 
         self.tempin_graph = PlotWidget()
         self.tempin_graph.setBackground(None)
         self.tempin_graph.showGrid(x=True, y=True)
+        self.tempin_graph.setMouseEnabled(x=False, y=False)
         self.data_in = self.tempin_graph.plot(
                     self.hour_list, self.tempin_list)
 
@@ -79,14 +81,11 @@ class Window(QDialog):
         self.layout.addWidget(self.pressout_label, 14, 10, 1, 4)
         self.layout.addWidget(self.pressout, 15, 10, 2, 4)
 
-        self.layout.addWidget(self.time, 0, 3, 3, 5,
-                                Qt.AlignmentFlag.AlignTop.AlignHCenter)
+        self.layout.addWidget(self.time, 0, 3, 3, 4)
         self.layout.addWidget(self.date, 0, 0, 1, 3)
 
-        self.layout.addWidget(self.tempin_plot_label, 4, 4, 1, 2,
-                                        Qt.AlignmentFlag.AlignCenter)
-        self.layout.addWidget(self.tempout_plot_label, 10, 4, 1, 2,
-                                        Qt.AlignmentFlag.AlignCenter)
+        self.layout.addWidget(self.tempin_plot_label, 4, 4, 1, 4)
+        self.layout.addWidget(self.tempout_plot_label, 10, 4, 1, 4)
 
         self.layout.addWidget(self.tempin_graph, 5, 0, 5, 10)
         self.layout.addWidget(self.tempout_graph, 11, 0, 5, 10)
@@ -106,8 +105,8 @@ class Window(QDialog):
         self.time.setText(formatted_time)
         self.date.setText(date)
 
-        temperature_in, humidity_in = sensor.inside_values()
-        temperature_out, humidity_out, pressure = sensor.outside_values()
+        temperature_in, humidity_in, pressure = sensors.inside_values()
+        temperature_out, humidity_out = sensors.outside_values()
         self.tempin.setText(str(temperature_in)+'˚C')
         self.humiin.setText(str(humidity_in)+' %')
         self.tempout.setText(str(temperature_out)+'˚C')
@@ -154,4 +153,4 @@ if __name__ == '__main__':
         app.setStyleSheet(styles.read())
 
     window.show()
-    sys-exit(app.exec())
+    sys.exit(app.exec())

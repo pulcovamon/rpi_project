@@ -1,0 +1,49 @@
+{
+  "C_Cpp_Runner.cCompilerPath": "/home/monika/.platformio/packages/toolchain-atmelavr/bin/avr-gcc",
+  "C_Cpp_Runner.cppCompilerPath": "/home/monika/.platformio/packages/toolchain-atmelavr/bin/avr-g++",
+  "C_Cpp_Runner.debuggerPath": "/home/monika/.platformio/packages/toolchain-atmelavr/bin/avr-gdb",
+  "C_Cpp_Runner.cStandard": "c11",
+  "C_Cpp_Runner.cppStandard": "c++11",
+  "C_Cpp_Runner.msvcBatchPath": "",
+  "C_Cpp_Runner.useMsvc": false,
+  "C_Cpp_Runner.warnings": [
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Wshadow",
+    "-Wformat=2",
+    "-Wconversion",
+    "-Wnull-dereference",
+    "-Wsign-conversion"
+  ],
+  "C_Cpp_Runner.enableWarnings": true,
+  "C_Cpp_Runner.warningsAsError": false,
+  "C_Cpp_Runner.compilerArgs": [],
+  "C_Cpp_Runner.linkerArgs": [],
+  "C_Cpp_Runner.includePaths": [
+    "/home/monika/Desktop/programming/python/rpi_project/bluetooth_comunication/include",
+    "/home/monika/Desktop/programming/python/rpi_project/bluetooth_comunication/src",
+    "/home/monika/Desktop/programming/python/rpi_project/bluetooth_comunication/.pio/libdeps/uno/DHT sensor library",
+    "/home/monika/Desktop/programming/python/rpi_project/bluetooth_comunication/.pio/libdeps/uno/Adafruit Unified Sensor",
+    "/home/monika/.platformio/packages/framework-arduino-avr/cores/arduino",
+    "/home/monika/.platformio/packages/framework-arduino-avr/variants/standard",
+    "/home/monika/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+    "/home/monika/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+    "/home/monika/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+    "/home/monika/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+    "/home/monika/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+    ""
+  ],
+  "C_Cpp_Runner.includeSearch": [
+    "*",
+    "**/*"
+  ],
+  "C_Cpp_Runner.excludeSearch": [
+    "**/build",
+    "**/build/**",
+    "**/.*",
+    "**/.*/**",
+    "**/.vscode",
+    "**/.vscode/**"
+  ]
+}
