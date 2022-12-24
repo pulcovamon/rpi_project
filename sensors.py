@@ -1,21 +1,48 @@
-from random import randint
-from typing import Tuple
-import serial
+import bluetooth
+import json
+from influxdb import InfluxDBClient
+import datetime
 
-def connection():
-    """_summary_
 
-    Returns:
-        _type_: _description_
-    """
+def connecting():
+    sensor_address = '98:D3:61:FD:74:C3'
+    socket = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
+    socket.connect((sensor_address, 1))
 
-    device = '/dev/HMSoft'
-    baud_rate = 9600
+    influx = InfluxDBClient('localhost', 8086, 'root', 'root', 'example')
+    influx.create_database('example')
 
-    s = serial.Serial(device, baud_rate)
+    def log_stats(client, sensor_address, stats):
+        json_body = [
+            {
+                "measurement": "sensor_data",
+                "tags": {
+                    "client": sensor_address,
+                },
+                "time": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                "fields": {
+                    "temperature": stats['temperature'],
+                    "humidity": stats['humidity'],
+                }
+            }
+        ]
 
-    return s
+        client.write_points(json_body)
 
+    buffer = ""
+
+    while True:
+        data = socket.recv(1024)
+        buffer += str(data, encoding='ascii')
+        try:
+            data = json.loads(buffer)
+            print("Received chunk", data)
+            log_stats(influx, sensor_address, data)
+            buffer = ""
+        except json.JSONDecodeError as e:
+            continue
+
+    socket.close()
 
 def inside_values()-> Tuple[float, int]:
     """Function for reading values from sensor
@@ -48,3 +75,6 @@ def outside_values(s)-> Tuple[float, int, float]:
     humidity = s.read(1)
 
     return temperature, humidity
+
+if __name__ == '__main__':
+    connecting()
