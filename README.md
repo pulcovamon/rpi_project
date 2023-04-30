@@ -1,5 +1,5 @@
-# rpi_project
-Weather station with Arduino and RPi communication <rb>
+# RPi project
+Weather station with Arduino and Raspberi Pi communication <rb>
 
 <pre>
 microcontrollers : Raspberry Pi 3 and Arduino nano clone <br>
