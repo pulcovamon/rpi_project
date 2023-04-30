@@ -3,7 +3,7 @@ Weather station with Arduino and Raspberi Pi communication <rb>
 
 <pre>
 microcontrollers : Raspberry Pi 3 and Arduino nano clone <br>
-modules          : DHT11 (temperature and humidity sensor), HC-05 (bluetooth module) <rb>
+modules          : DHT11 (temperature and humidity sensor), HC-05 (bluetooth module) <br>
 display          : 3.5 inch RPI LCD (B) WaveShare <br>
 </pre>
 
